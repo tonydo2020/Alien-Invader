@@ -20,14 +20,16 @@ def run_game():
     bullets = Group()
 
     # Make an alien
-    alien = Alien(ai_settings, screen)
+    aliens = Group()
 
+    #Creates the fleet of aliens
+    gf.create_fleet(ai_settings, screen, ship, aliens)
     # Start the main loop for the game.
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
         gf.update_bullets(bullets)
-        gf.update_screen(ai_settings, screen, ship, alien, bullets)
+        #gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
             # Get rid of te bullets that have disappeared.
         for bullet in bullets.copy():
@@ -35,7 +37,7 @@ def run_game():
                 bullets.remove(bullet)
         print(len(bullets))
 
-        gf.update_screen(ai_settings, screen, ship, alien, bullets)
+        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
         # Redraw the screen during each pass through the loop
         screen.fill(ai_settings.bg_color)
         ship.blitme()
